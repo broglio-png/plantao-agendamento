@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Agendamento de Plantão</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-calendar-alt"></i> Sistema de Agendamento de Plantão</h1>
+        </header>
+
+        <!-- Seção de Configuração -->
+        <section id="config-section" class="section">
+            <h2><i class="fas fa-cog"></i> Configuração do Plantão</h2>
+            
+            <div class="form-group">
+                <label for="month-select">Selecione o Mês:</label>
+                <select id="month-select">
+                    <option value="">Escolha um mês</option>
+                    <option value="0">Janeiro</option>
+                    <option value="1">Fevereiro</option>
+                    <option value="2">Março</option>
+                    <option value="3">Abril</option>
+                    <option value="4">Maio</option>
+                    <option value="5">Junho</option>
+                    <option value="6">Julho</option>
+                    <option value="7">Agosto</option>
+                    <option value="8">Setembro</option>
+                    <option value="9">Outubro</option>
+                    <option value="10">Novembro</option>
+                    <option value="11">Dezembro</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="year-select">Ano:</label>
+                <select id="year-select"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="plantonista-name">Nome do Plantonista:</label>
+                <input type="text" id="plantonista-name" placeholder="Digite o nome do plantonista">
+                <button id="add-plantonista" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Adicionar
+                </button>
+            </div>
+
+            <div id="plantonistas-list" class="plantonistas-container"></div>
+
+            <button id="start-selection" class="btn btn-success" style="display: none;">
+                <i class="fas fa-play"></i> Iniciar Seleção de Disponibilidade
+            </button>
+        </section>
+
+        <!-- Seção de Seleção de Disponibilidade -->
+        <section id="selection-section" class="section" style="display: none;">
+            <h2><i class="fas fa-user-check"></i> Seleção de Disponibilidade</h2>
+            
+            <div class="current-plantonista">
+                <h3>Plantonista: <span id="current-plantonista-name"></span></h3>
+                <p class="selection-info">
+                    <i class="fas fa-info-circle"></i> 
+                    Selecione pelo menos 10 dias disponíveis. 
+                    Dias selecionados: <span id="selected-count">0</span>
+                </p>
+            </div>
+
+            <div id="calendar-container" class="calendar-container"></div>
+
+            <div class="selection-controls">
+                <button id="clear-selection" class="btn btn-secondary">
+                    <i class="fas fa-eraser"></i> Limpar Seleção
+                </button>
+                <button id="confirm-selection" class="btn btn-primary" disabled>
+                    <i class="fas fa-check"></i> Confirmar Disponibilidade
+                </button>
+            </div>
+        </section>
+
+        <!-- Seção de Administração -->
+        <section id="admin-section" class="section" style="display: none;">
+            <h2><i class="fas fa-user-cog"></i> Painel do Administrador</h2>
+            
+            <div class="admin-controls">
+                <button id="auto-organize" class="btn btn-warning">
+                    <i class="fas fa-magic"></i> Organizar Automaticamente
+                </button>
+                <button id="export-schedule" class="btn btn-success">
+                    <i class="fas fa-download"></i> Exportar Escala
+                </button>
+                <button id="reset-system" class="btn btn-danger">
+                    <i class="fas fa-redo"></i> Reiniciar Sistema
+                </button>
+            </div>
+
+            <div id="schedule-overview" class="schedule-overview"></div>
+        </section>
+
+        <!-- Modal de Exportação -->
+        <div id="export-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3><i class="fas fa-file-export"></i> Exportar Escala</h3>
+                <div class="export-options">
+                    <button id="export-pdf" class="btn btn-primary">
+                        <i class="fas fa-file-pdf"></i> Exportar como PDF
+                    </button>
+                    <button id="export-excel" class="btn btn-success">
+                        <i class="fas fa-file-excel"></i> Exportar como Excel
+                    </button>
+                    <button id="export-txt" class="btn btn-secondary">
+                        <i class="fas fa-file-alt"></i> Exportar como Texto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
